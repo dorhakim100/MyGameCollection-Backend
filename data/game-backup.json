@@ -1,0 +1,222 @@
+[
+  {
+    "_id": "t101",
+    "name": "Pokemon Gold",
+    "price": 123,
+    "labels": ["Adventure", "RPG"],
+    "createdAt": 1631031801011,
+    "inStock": true,
+    "companies": ["Nintendo"],
+    "cover": "https://m.media-amazon.com/images/I/61X24yubIHL._AC_UF1000,1000_QL80_.jpg",
+    "preview": "Embark on a classic RPG adventure to become the ultimate Pokémon Master in the Johto region."
+  },
+  {
+    "_id": "t102",
+    "name": "The Legend of Zelda: Breath of the Wild",
+    "price": 60,
+    "labels": ["Action", "Adventure"],
+    "createdAt": 1631132802011,
+    "inStock": true,
+    "companies": ["Nintendo"],
+    "cover": "https://m.media-amazon.com/images/I/81KGsbq8ekL._AC_UF1000,1000_QL80_.jpg",
+    "preview": "Explore the vast open world of Hyrule in this critically acclaimed action-adventure game."
+  },
+  {
+    "_id": "t103",
+    "name": "Super Mario Odyssey",
+    "price": 50,
+    "labels": ["Platformer", "Adventure"],
+    "createdAt": 1631233803011,
+    "inStock": false,
+    "companies": ["Nintendo"],
+    "cover": "https://m.media-amazon.com/images/I/91SF0Tzmv4L.jpg",
+    "preview": "Join Mario on a globe-trotting adventure to rescue Princess Peach from Bowser's wedding plans."
+  },
+  {
+    "_id": "t104",
+    "name": "Pokemon Let's Go Pikachu",
+    "price": 30,
+    "labels": ["Adventure", "RPG"],
+    "createdAt": 1631334804011,
+    "inStock": true,
+    "companies": ["Nintendo"],
+    "cover": "https://m.media-amazon.com/images/I/71w18E60zzL._AC_UF1000,1000_QL80_.jpg",
+    "preview": "Experience a delightful reimagining of Pokémon Yellow with Pikachu as your partner."
+  },
+  {
+    "_id": "t105",
+    "name": "Fortnite",
+    "price": 0,
+    "labels": ["Battle Royale", "Shooter"],
+    "createdAt": 1631435805011,
+    "inStock": true,
+    "companies": ["Microsoft", "Sony", "Nintendo"],
+    "cover": "https://m.media-amazon.com/images/M/MV5BNzU2YTY2OTgtZGZjZi00MTAyLThlYjUtMWM5ZmYzOGEyOWJhXkEyXkFqcGdeQXVyNTgyNTA4MjM@._V1_FMjpg_UX1000_.jpg",
+    "preview": "Jump into the action-packed battle royale phenomenon where only one can emerge victorious."
+  },
+  {
+    "_id": "t106",
+    "name": "Call of Duty: Modern Warfare REMASTERED",
+    "price": 60,
+    "labels": ["Shooter", "Action"],
+    "createdAt": 1631536806011,
+    "inStock": false,
+    "companies": ["Microsoft", "Sony"],
+    "cover": "https://upload.wikimedia.org/wikipedia/en/d/d4/Call_of_Duty_-_Modern_Warfare_Remastered.jpeg",
+    "preview": "Relive the iconic first-person shooter experience with enhanced graphics and gameplay."
+  },
+  {
+    "_id": "t107",
+    "name": "Animal Crossing: New Horizons",
+    "price": 50,
+    "labels": ["Simulation", "Social"],
+    "createdAt": 1631637807011,
+    "inStock": true,
+    "companies": ["Nintendo"],
+    "cover": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcSC-Jwca7M-Svlw1C49HwQsNa5QscJqSrcw&s",
+    "preview": "Create your dream island paradise and make friends with charming animal villagers."
+  },
+  {
+    "_id": "t108",
+    "name": "Among Us",
+    "price": 5,
+    "labels": ["Party", "Social Deduction"],
+    "createdAt": 1631738808011,
+    "inStock": true,
+    "companies": ["Nintendo"],
+    "cover": "https://upload.wikimedia.org/wikipedia/en/9/9a/Among_Us_cover_art.jpg",
+    "preview": "Uncover the impostor among your crew in this popular social deduction game."
+  },
+  {
+    "_id": "t109",
+    "name": "Hades",
+    "price": 25,
+    "labels": ["Roguelike", "Action"],
+    "createdAt": 1631839809011,
+    "inStock": false,
+    "companies": ["Nintendo", "Sony", "Microsoft"],
+    "cover": "https://upload.wikimedia.org/wikipedia/en/c/cc/Hades_cover_art.jpg",
+    "preview": "Battle through the underworld in this critically acclaimed roguelike dungeon crawler."
+  },
+  {
+    "_id": "t110",
+    "name": "Cyberpunk 2077",
+    "price": 60,
+    "labels": ["RPG", "Action"],
+    "createdAt": 1631940810011,
+    "inStock": true,
+    "companies": ["Sony", "Microsoft"],
+    "cover": "https://upload.wikimedia.org/wikipedia/en/9/9f/Cyberpunk_2077_box_art.jpg",
+    "preview": "Immerse yourself in a dystopian future in this ambitious open-world RPG."
+  },
+  {
+    "_id": "t111",
+    "name": "Spider-Man: Miles Morales",
+    "price": 50,
+    "labels": ["Action", "Adventure"],
+    "createdAt": 1632041811011,
+    "inStock": true,
+    "companies": ["Sony"],
+    "cover": "https://image.api.playstation.com/vulcan/ap/rnd/202008/1020/PRfYtTZQsuj3ALrBXGL8MjAH.jpg",
+    "preview": "Swing into action as Miles Morales in this thrilling Spider-Man adventure."
+  },
+  {
+    "_id": "t112",
+    "name": "Halo Infinite",
+    "price": 60,
+    "labels": ["Shooter", "Action"],
+    "createdAt": 1632142812011,
+    "inStock": true,
+    "companies": ["Microsoft"],
+    "cover": "https://upload.wikimedia.org/wikipedia/en/1/14/Halo_Infinite.png",
+    "preview": "Join Master Chief on his latest journey in this epic first-person shooter."
+  },
+  {
+    "_id": "t113",
+    "name": "The Last of Us Part II REMASTERED",
+    "price": 60,
+    "labels": ["Action", "Adventure"],
+    "createdAt": 1632243813011,
+    "inStock": false,
+    "companies": ["Sony"],
+    "cover": "https://m.media-amazon.com/images/I/818m9WGY0lL._AC_UF1000,1000_QL80_.jpg",
+    "preview": "Experience the emotional and intense continuation of Ellie’s journey in a post-apocalyptic world."
+  },
+  {
+    "_id": "t114",
+    "name": "Ghost of Tsushima",
+    "price": 60,
+    "labels": ["Action", "Adventure"],
+    "createdAt": 1632344814011,
+    "inStock": true,
+    "companies": ["Sony"],
+    "cover": "https://upload.wikimedia.org/wikipedia/en/b/b6/Ghost_of_Tsushima.jpg",
+    "preview": "Become a legendary samurai in this stunning open-world adventure set in feudal Japan."
+  },
+  {
+    "_id": "t115",
+    "name": "Gears 5",
+    "price": 50,
+    "labels": ["Shooter", "Action"],
+    "createdAt": 1632445815011,
+    "inStock": true,
+    "companies": ["Microsoft"],
+    "cover": "https://store-images.s-microsoft.com/image/apps.10933.65494054591008504.4eae27ba-1cfe-4af2-950a-4af81f8cd22a.b5b2909d-8884-48d0-b25a-68d6518c9b73",
+    "preview": "Dive into intense cover-based shooting action in the latest installment of the Gears series."
+  },
+  {
+    "_id": "t116",
+    "name": "Super Smash Bros. Ultimate",
+    "price": 60,
+    "labels": ["Fighting", "Party"],
+    "createdAt": 1632546816011,
+    "inStock": true,
+    "companies": ["Nintendo"],
+    "cover": "https://m.media-amazon.com/images/I/81aJ-R4E6gL._AC_UF1000,1000_QL80_.jpg",
+    "preview": "Battle it out with your favorite Nintendo characters in the ultimate crossover fighting game."
+  },
+  {
+    "_id": "t117",
+    "name": "Minecraft",
+    "price": 26.95,
+    "labels": ["Sandbox", "Adventure"],
+    "createdAt": 1632647817011,
+    "inStock": true,
+    "companies": ["Microsoft"],
+    "cover": "https://upload.wikimedia.org/wikipedia/en/5/51/Minecraft_cover.png",
+    "preview": "Build, explore, and survive in the endless possibilities of Minecraft's blocky world."
+  },
+  {
+    "_id": "t118",
+    "name": "Stardew Valley",
+    "price": 15,
+    "labels": ["Simulation", "RPG"],
+    "createdAt": 1632748818011,
+    "inStock": true,
+    "companies": ["Nintendo", "Sony", "Microsoft"],
+    "cover": "https://upload.wikimedia.org/wikipedia/en/thumb/f/fd/Stardew_Valley_cover_art.png/220px-Stardew_Valley_cover_art.png",
+    "preview": "Create your dream farm and build a thriving community in this charming farming simulator."
+  },
+  {
+    "_id": "t119",
+    "name": "The Elder Scrolls V: Skyrim",
+    "price": 40,
+    "labels": ["RPG", "Adventure"],
+    "createdAt": 1632849819011,
+    "inStock": true,
+    "companies": ["Microsoft", "Sony"],
+    "cover": "https://upload.wikimedia.org/wikipedia/en/5/5e/The_Elder_Scrolls_V_Skyrim_cover_art.jpg",
+    "preview": "Embark on an epic quest in the vast open world of Skyrim, filled with dragons, magic, and adventure."
+  },
+  {
+    "_id": "t120",
+    "name": "Red Dead Redemption 2",
+    "price": 60,
+    "labels": ["Action", "Adventure"],
+    "createdAt": 1632950820011,
+    "inStock": true,
+    "companies": ["Sony", "Microsoft"],
+    "cover": "https://upload.wikimedia.org/wikipedia/en/4/44/Red_Dead_Redemption_II.jpg",
+    "preview": "Experience the epic tale of outlaw Arthur Morgan in this critically acclaimed open-world adventure."
+  }
+]
