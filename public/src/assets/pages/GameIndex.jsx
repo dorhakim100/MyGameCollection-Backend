@@ -2,7 +2,9 @@ import { useDispatch, useSelector } from 'react-redux'
 // import { NavLink } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
-import { useEffect } from 'react'
+import { Button, Autocomplete, TextField } from '@mui/material'
+
+import { useEffect, useState } from 'react'
 
 import { loadGames } from '../../store/actions/game.actions.js'
 
@@ -21,17 +23,21 @@ import gameCover from '/game-cover.jpg'
 
 import '../css/GameIndex.css'
 import { gameService } from '../../services/game.service.js'
+import { userService } from '../../services/user.service.js'
 
 export function GameIndex() {
   const games = useSelector((storeState) => storeState.gameModule.games)
   const isLoading = useSelector((storeState) => storeState.gameModule.isLoading)
   const filterBy = useSelector((storeState) => storeState.gameModule.filterBy)
 
+  const [user, setUser] = useState(userService.getLoggedinUser() || {})
+
   console.log(games)
   console.log(isLoading)
 
   useEffect(() => {
     console.log(filterBy)
+    console.log(user)
     loadGames().then(() => {
       // setIsLoadingFalse(!isLoading)
     })
@@ -43,8 +49,6 @@ export function GameIndex() {
 
   function onChangePageIdx(diff) {
     const maxPage = gameService.getMaxPage()
-    console.log(maxPage)
-    console.log(filterBy.pageIdx)
     if (filterBy.pageIdx + 1 === maxPage && diff === 1) {
       const newPageIdx = 0
       setFilterBy({ ...filterBy, pageIdx: newPageIdx })
@@ -53,25 +57,62 @@ export function GameIndex() {
     if (filterBy.pageIdx === 0 && diff === -1) return
     const newPageIdx = filterBy.pageIdx + diff
     setFilterBy({ ...filterBy, pageIdx: newPageIdx })
+    // gameService.getMaxPage().then((maxPage) => {
+    //   console.log(maxPage)
+    //   console.log(filterBy.pageIdx)
+    //   if (filterBy.pageIdx + 1 === maxPage && diff === 1) {
+    //     const newPageIdx = 0
+    //     setFilterBy({ ...filterBy, pageIdx: newPageIdx })
+    //     return
+    //   }
+    //   if (filterBy.pageIdx === 0 && diff === -1) return
+    //   const newPageIdx = filterBy.pageIdx + diff
+    //   setFilterBy({ ...filterBy, pageIdx: newPageIdx })
+    // })
   }
 
-  function onSort({ target }) {
-    const newSortBy = target.value.replace(' ', '')
+  function onSort(ev, value) {
+    console.log(value)
+    const newSortBy = value.replace(' ', '')
 
     setFilterBy({ ...filterBy, sortBy: newSortBy, pageIdx: 0 })
   }
 
+  const options = [
+    'Name Descending',
+    'Name Ascending',
+    'Price Descending',
+    'Price Ascending',
+    'Time Descending',
+    'Time Ascending',
+  ]
+
   return (
     <section className='section-container'>
       <div className='game-index-user-interface'>
-        <GameFilter filterBy={filterBy} onSetFilter={onSetFilter} />
+        <GameFilter
+          filterBy={filterBy}
+          onSetFilter={(event, value) => onSetFilter(ev, value)}
+        />
         {/* <h2>My Games</h2> */}
         <div>
-          <label htmlFor='sortBy'>Sort By:</label>
+          <div className='sort-container'>
+            <Autocomplete
+              onChange={onSort}
+              disablePortal
+              id='combo-box-demo'
+              options={options}
+              sx={{
+                width: 250,
+              }}
+              renderInput={(params) => <TextField {...params} label='Sort' />}
+            />
+          </div>
+          {/* <label htmlFor='sortBy'>Sort By:</label>
           <input
-            onChange={onSort}
-            list='sortOptions'
-            name='sortOption'
+          onChange={onSort}
+          list='sortOptions'
+          name='sortOption'
             id='sortOption'
           />
           <datalist id='sortOptions'>
@@ -81,19 +122,25 @@ export function GameIndex() {
             <option>Price Ascending</option>
             <option>Time Descending</option>
             <option>Time Ascending</option>
-          </datalist>
+          </datalist> */}
         </div>
-        <Link to={`/game/edit`}>
-          <button>Add Game</button>
-        </Link>
+        {user.isAdmin && (
+          <Link to={`/game/edit`}>
+            <button>Add Game</button>
+          </Link>
+        )}
       </div>
 
       {!isLoading && <GamesList games={games} />}
 
       <div className='page-container'>
-        <button onClick={() => onChangePageIdx(-1)}>Previous</button>
+        <Button variant='contained' onClick={() => onChangePageIdx(-1)}>
+          Previous
+        </Button>
         <span>{filterBy.pageIdx + 1}</span>
-        <button onClick={() => onChangePageIdx(1)}>Next</button>
+        <Button variant='contained' onClick={() => onChangePageIdx(1)}>
+          Next
+        </Button>
       </div>
     </section>
   )

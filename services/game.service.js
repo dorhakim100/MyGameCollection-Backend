@@ -20,7 +20,7 @@ function query(filterBy = {}) {
   }
   let inStockBole
   inStockBole = inStock === 'all' ? true : false
-
+  console.log(inStockBole)
   let filteredGames = games
   if (filterBy.txt) {
     const regExp = new RegExp(filterBy.txt, 'i')
@@ -30,9 +30,9 @@ function query(filterBy = {}) {
     const maxPriceInte = +filterBy.maxPrice
     filteredGames = filteredGames.filter((game) => game.price <= maxPriceInte)
   }
-  if (inStockBole) {
+  if (!inStockBole) {
     filteredGames = filteredGames.filter(
-      (game) => game.inStock === JSON.parse(inStockBole)
+      (game) => !game.inStock === JSON.parse(inStockBole)
     )
   }
   if (filterBy.labels && filterBy.labels.length) {
@@ -68,7 +68,7 @@ function query(filterBy = {}) {
       sortDirection = 1
       type = 'createdAt'
     }
-    filteredToys = filteredToys.sort((game1, game2) => {
+    filteredGames = filteredGames.sort((game1, game2) => {
       if (type === 'name') {
         return game1.name.localeCompare(game2.name) * sortDirection
       } else if (type === 'price' || type === 'createdAt') {

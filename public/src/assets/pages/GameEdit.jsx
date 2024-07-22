@@ -11,6 +11,8 @@ import { loadGames } from '../../store/actions/game.actions.js'
 import { showSuccessMsg } from '../../services/event-bus.service.js'
 import { showErrorMsg } from '../../services/event-bus.service.js'
 
+import { MyForm } from './MyForm.jsx'
+
 import '../css/GameEdit.css'
 
 export function GameEdit() {
@@ -52,9 +54,11 @@ export function GameEdit() {
   }, [params.gameId])
 
   function loadGame() {
+    if (params.gameId === undefined) return
     gameService
       .getById(params.gameId)
       .then((game) => {
+        console.log(game)
         setEditGame({ ...game })
         setGame({ ...game })
         setCover(game.cover)
@@ -153,7 +157,6 @@ export function GameEdit() {
     <section className='section-container'>
       {/* {game && <h2>Edit{` - ${game.name}`}</h2>} */}
       {cover && <img src={cover} alt='' className='game-cover-edit' />}
-
       <form action='' className='game-edit-form' onSubmit={onSaveGame}>
         <div>
           <label htmlFor=''>Game Title:</label>

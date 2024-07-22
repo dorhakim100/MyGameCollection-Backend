@@ -13,6 +13,14 @@
     right: 0px;
 }
 
+.sort-container{
+    /* height: 100px; */
+    /* width: 200px; */
+    background-color: var(--text);
+    padding: 15px;
+    border-radius: 15px;
+}
+
 .games-container{
     max-width: 1280px;
     margin: 0 auto;
@@ -107,3 +115,4 @@
     left: 0;
     right: 0;
 }
+

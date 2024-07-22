@@ -31,3 +31,41 @@
     height: 5em;
 
 }
+
+.login-container{
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    gap: 1em;
+}
+.cart-button-container{
+    display: flex;
+
+}
+.cart-quantity{
+    position: relative;
+    /* content: ''; */
+    /* bottom: 35px; */
+    /* left: 15px; */
+    right: 15px;
+    justify-self: start;
+    z-index: 2;
+
+
+}
+
+.cart-quantity::before{
+    position: absolute;
+    content: '';
+    top: 2px;
+    left: -5px;
+    height: 20px;
+    width: 20px;
+    background-color: var(--red);
+    z-index: -1;
+    border-radius: 25px;
+}
+
+.cart-button{
+    z-index: 0;
+}

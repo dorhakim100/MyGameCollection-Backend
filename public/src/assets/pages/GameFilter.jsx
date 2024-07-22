@@ -3,6 +3,8 @@ import { useEffect, useState, useRef } from 'react'
 import { setFilterBy } from '../../store/actions/game.actions.js'
 import { utilService } from '../../services/util.service.js'
 
+import { Button } from '@mui/material'
+
 import '../css/GameFilter.css'
 
 export function GameFilter({ filterBy }) {
@@ -114,12 +116,13 @@ export function GameFilter({ filterBy }) {
 
   return (
     <div className='filtering-container'>
-      <button
+      <Button
+        variant='contained'
         className='is-filtering-button'
         onClick={() => onSetIsFiltering()}
       >
         Filter
-      </button>
+      </Button>
       <input
         className='is-filtering-checkbox'
         type='checkbox'

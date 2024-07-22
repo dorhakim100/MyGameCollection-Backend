@@ -22,7 +22,8 @@ export function Home() {
   }
   return (
     <section>
-      <h2>Hello</h2>
+      <h2>"Your Ultimate Destination for Gaming Excellence!"</h2>
+      <h4>Choose your console</h4>
       <div className='controllers-container'>
         <img
           onClick={() => onSelectCompany('Sony')}

@@ -7,19 +7,19 @@ export const ADD_GAME = 'ADD_GAME'
 export const UPDATE_GAME = 'UPDATE_GAME'
 export const GAME_UNDO = 'GAME_UNDO'
 
-//* Shopping cart
-export const TOGGLE_CART_IS_SHOWN = 'TOGGLE_CART_IS_SHOWN'
-export const ADD_GAME_TO_CART = 'ADD_GAME_TO_CART'
-export const REMOVE_GAME_FROM_CART = 'REMOVE_GAME_FROM_CART'
-export const CLEAR_CART = 'CLEAR_CART'
+// //* Shopping cart
+// export const TOGGLE_CART_IS_SHOWN = 'TOGGLE_CART_IS_SHOWN'
+// export const ADD_GAME_TO_CART = 'ADD_GAME_TO_CART'
+// export const REMOVE_GAME_FROM_CART = 'REMOVE_GAME_FROM_CART'
+// export const CLEAR_CART = 'CLEAR_CART'
 
 export const SET_FILTER_BY = 'SET_FILTER_BY'
 export const SET_IS_LOADING = 'SET_IS_LOADING'
 
 const initialState = {
   games: [],
-  isCartShown: false,
-  shoppingCart: [],
+  // isCartShown: false,
+  // shoppingCart: [],
   isLoading: true,
   filterBy: gameService.getDefaultFilter(),
   lastGames: [],
@@ -50,24 +50,24 @@ export function gameReducer(state = initialState, action = {}) {
         ),
       }
 
-    //* Shopping gamet
-    case TOGGLE_CART_IS_SHOWN:
-      return { ...state, isCartShown: !state.isCartShown }
+    // //* Shopping Cart
+    // case TOGGLE_CART_IS_SHOWN:
+    //   return { ...state, isCartShown: !state.isCartShown }
 
-    case ADD_GAME_TO_CART:
-      return {
-        ...state,
-        shoppingCart: [...state.shoppingCart, action.game],
-      }
+    // case ADD_GAME_TO_CART:
+    //   return {
+    //     ...state,
+    //     shoppingCart: [...state.shoppingCart, action.game],
+    //   }
 
-    case REMOVE_GAME_FROM_CART:
-      const shoppingCart = state.shoppingCart.filter(
-        (game) => game._id !== action.gameId
-      )
-      return { ...state, shoppingCart }
+    // case REMOVE_GAME_FROM_CART:
+    //   const shoppingCart = state.shoppingCart.filter(
+    //     (game) => game._id !== action.gameId
+    //   )
+    //   return { ...state, shoppingCart }
 
-    case CLEAR_CART:
-      return { ...state, shoppingCart: [] }
+    // case CLEAR_CART:
+    //   return { ...state, shoppingCart: [] }
 
     case SET_FILTER_BY:
       return {

@@ -2,6 +2,7 @@ import { utilService } from './util.service.js'
 import { httpService } from './http.service.js'
 
 const BASE_URL = 'game/'
+const PAGE_SIZE = 6
 
 export const gameService = {
   query,
@@ -10,6 +11,7 @@ export const gameService = {
   remove,
   getEmptygame,
   getDefaultFilter,
+  getMaxPage,
 }
 
 function query(filterBy = {}) {
@@ -43,9 +45,9 @@ function save(game) {
 
 function getEmptygame() {
   return {
-    vendor: 'Susita-' + (Date.now() % 1000),
+    name: '' + (Date.now() % 1000),
     price: utilService.getRandomIntInclusive(1000, 9000),
-    speed: utilService.getRandomIntInclusive(75, 200),
+    // speed: utilService.getRandomIntInclusive(75, 200),
   }
 }
 
@@ -59,4 +61,12 @@ function getDefaultFilter() {
     sortBy: '',
     pageIdx: 0,
   }
+}
+
+function getMaxPage() {
+  return query().then((games) => {
+    const gamesLength = games.length
+    const maxPage = Math.ceil(gamesLength / PAGE_SIZE)
+    return maxPage
+  })
 }
