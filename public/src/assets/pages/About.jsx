@@ -6,7 +6,7 @@ import { useState } from 'react'
 
 import { Button } from '@mui/material'
 
-import '../css/about.css'
+// import '../css/about.scss'
 
 export function About() {
   return (

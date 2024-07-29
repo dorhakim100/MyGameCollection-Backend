@@ -12,11 +12,14 @@ import { removeGame } from '../../store/actions/game.actions.js'
 import { addGameToCart } from '../../store/actions/user.actions.js'
 
 import gameCover from '/game-cover.jpg'
+import loader from '/loader.svg'
 
-import '../css/GameDetails.css'
+// import '../css/GameDetails.css'
 import { showSuccessMsg } from '../../services/event-bus.service.js'
 import { showErrorMsg } from '../../services/event-bus.service.js'
 import { userService } from '../../services/user.service.js'
+import { setIsLoadingFalse } from '../../store/actions/game.actions.js'
+import { setIsLoadingTrue } from '../../store/actions/game.actions.js'
 export function GameDetails() {
   const params = useParams()
   const navigate = useNavigate()
@@ -24,17 +27,19 @@ export function GameDetails() {
   const [game, setGame] = useState({ labels: [], companies: [] })
 
   const [user, setUser] = useState(userService.getLoggedinUser() || {})
+  const isLoading = useSelector((storeState) => storeState.gameModule.isLoading)
 
   useEffect(() => {
-    console.log(game)
-    loadGame()
+    setIsLoadingTrue()
+    loadGame().then(() => {
+      setIsLoadingFalse()
+    })
   }, [params.gameId])
 
   function loadGame() {
-    gameService
+    return gameService
       .getById(params.gameId)
       .then((game) => {
-        console.log(game)
         setGame({ ...game })
       })
       .catch((err) => {
@@ -45,7 +50,6 @@ export function GameDetails() {
   }
 
   function onRemoveGame(gameId) {
-    console.log(gameId)
     removeGame(gameId)
       .then(() => {
         showSuccessMsg('Deleted game')
@@ -72,8 +76,7 @@ export function GameDetails() {
       .then(() => {
         // userService.addGameToCart(game)
         showSuccessMsg('Game added')
-        console.log('bla')
-        navigate(`/game`)
+        // navigate(`/game`)
       })
       .catch((err) => {
         showErrorMsg(`Couldn't add game`)
@@ -81,6 +84,11 @@ export function GameDetails() {
   }
   return (
     <section className='section-container game-details'>
+      {isLoading && (
+        <div className='loader'>
+          <img src={loader} alt='' />
+        </div>
+      )}
       <div className='buttons-container'>
         <Button variant='outlined'>
           <Link to={`/game`} className='back-button'>

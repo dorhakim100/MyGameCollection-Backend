@@ -22,9 +22,10 @@ export const gameService = {
   getRandomgame,
   getDefaultFilter,
   getMaxPage,
+  getRandomGames,
 }
 
-function query(filterBy = {}) {
+function query(filterBy = {}, isAll) {
   return storageService.query(STORAGE_KEY).then((games) => {
     const regExp = new RegExp(filterBy.txt, 'i')
     if (filterBy.txt) {
@@ -92,6 +93,7 @@ function query(filterBy = {}) {
     if (filterBy.pageIdx === null) {
       return games
     } else {
+      if (isAll) return games
       const startIdx = filterBy.pageIdx * PAGE_SIZE
       games = games.slice(startIdx, startIdx + PAGE_SIZE)
       return games
@@ -145,11 +147,24 @@ function getDefaultFilter() {
   }
 }
 
-function getMaxPage() {
-  const gamesLength = JSON.parse(localStorage.getItem(STORAGE_KEY)).length
-  console.log(gamesLength)
-  const maxPage = Math.ceil(gamesLength / PAGE_SIZE)
-  return maxPage
+function getMaxPage(filterBy) {
+  // const gamesLength = JSON.parse(localStorage.getItem(STORAGE_KEY)).length
+  return query(filterBy, true).then((games) => {
+    const gamesLength = games.length
+    const maxPage = Math.ceil(gamesLength / PAGE_SIZE)
+    return maxPage
+  })
+}
+
+function getRandomGames() {
+  const randomGames = []
+  return query(getDefaultFilter(), true).then((games) => {
+    for (let i = 0; i < 12; i++) {
+      const currIdx = utilService.getRandomIntInclusive(0, 35)
+      randomGames.push(games[currIdx])
+    }
+    return randomGames
+  })
 }
 
 // TEST DATA

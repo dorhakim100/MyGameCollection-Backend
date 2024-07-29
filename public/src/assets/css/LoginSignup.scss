@@ -9,12 +9,11 @@
 
     z-index: 3;
 
-}
-
-.login-form{
-    display: flex;
-    flex-direction: column;
-    padding: 1em;
-
-    gap: 1em;
+    .login-form{
+        display: flex;
+        flex-direction: column;
+        padding: 1em;
+    
+        gap: 1em;
+    }
 }

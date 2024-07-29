@@ -10,7 +10,7 @@ import { showSuccessMsg } from '../../services/event-bus.service.js'
 
 import { MyForm } from './MyForm.jsx'
 
-import '../css/LoginSignun.css'
+// import '../css/LoginSignun.css'
 
 export function LoginSignup({ onSetUser, toggleLoginPage }) {
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
@@ -33,12 +33,11 @@ export function LoginSignup({ onSetUser, toggleLoginPage }) {
   }
 
   function handleSubmit(ev) {
+    console.log(credentials)
     ev.preventDefault()
-    console.log('ev')
     onLogin(credentials)
   }
   function onLogin(credentials) {
-    console.log(credentials)
     isSignup
       ? signup(credentials)
           .then((loggedinUser) => {
@@ -68,8 +67,12 @@ export function LoginSignup({ onSetUser, toggleLoginPage }) {
       <button onClick={toggleLoginPage}>
         <i className='fa-solid fa-x'></i>
       </button>
-      <MyForm handleSubmit={handleSubmit} isSignup={isSignup} />
-      {/* <form className='login-form' onSubmit={handleSubmit}>
+      {/* <MyForm
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        isSignup={isSignup}
+      /> */}
+      <form className='login-form' onSubmit={handleSubmit}>
         <input
           type='text'
           name='username'
@@ -99,7 +102,7 @@ export function LoginSignup({ onSetUser, toggleLoginPage }) {
           />
         )}
         <button>{isSignup ? 'Signup' : 'Login'}</button>
-      </form> */}
+      </form>
 
       <div className='btns'>
         <a

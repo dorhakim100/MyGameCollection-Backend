@@ -1,24 +1,40 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { NavLink, Link, useNavigate } from 'react-router-dom'
+import { NavLink, Link, useNavigate, useParams } from 'react-router-dom'
 import { useState, useRef, useEffect } from 'react'
+
+import { setFilterBy } from '../../store/actions/game.actions.js'
+import { utilService } from '../../services/util.service.js'
+import { gameService } from '../../services/game.service.js'
 
 import { UserMsg } from './UserMsg.jsx'
 import { LoginSignup } from './LoginSignup.jsx'
 import { Cart } from './Cart.jsx'
+import { SearchBar } from './SearchBar.jsx'
+import { NavBar } from './NavBar.jsx'
 
 import { userService } from '../../services/user.service.js'
 import { login, signup, logout } from '../../store/actions/user.actions.js'
 
-import { showErrorMsg } from '../../services/event-bus.service.js'
+import {
+  showErrorMsg,
+  showSuccessMsg,
+} from '../../services/event-bus.service.js'
 
 import icon from '/game-controller.svg'
+import Search from '@mui/icons-material/Search.js'
 
-import '../css/AppHeader.css'
+// import '../css/AppHeader.css'
 
 export function AppHeader() {
   const navigate = useNavigate()
 
   const [user, setUser] = useState(userService.getLoggedinUser())
+  const filterBy = useSelector(
+    (storeSelector) => storeSelector.gameModule.filterBy
+  )
+
+  const [onFilterBy, setOnFilterBy] = useState(filterBy)
+  const debouncedSetFilter = useRef(utilService.debounce(setOnFilterBy, 500))
 
   const [isCart, setIsCart] = useState(false)
   const [isLoginPage, setIsLoginPage] = useState(false)
@@ -27,18 +43,28 @@ export function AppHeader() {
   const storeCart = useSelector(
     (stateSelector) => stateSelector.userModule.shoppingCart
   )
-  console.log(storeCart)
 
   const [cartLength, setCartLength] = useState(0)
 
-  // useEffect(() => {
-  // }, [user])
+  const navBarRef = useRef()
 
   function onSetUser(user) {
     setUser(user)
+    if (user === null) {
+      navigate(`/`)
+      return
+    }
     setScore(user.score)
     navigate(`/`)
   }
+
+  useEffect(() => {
+    setUser(user)
+    if (user === null) {
+      return
+    }
+    setScore(user.score)
+  }, [])
 
   function onLogout() {
     // userService
@@ -52,10 +78,20 @@ export function AppHeader() {
     logout()
       .then(() => {
         onSetUser(null)
+
+        showSuccessMsg('Logged out')
       })
       .catch((err) => {
         showErrorMsg('OOPs try again')
       })
+  }
+
+  function toggleNavBar() {
+    if (navBarRef.current.style.display === 'flex') {
+      navBarRef.current.style.display = 'none'
+    } else {
+      navBarRef.current.style.display = 'flex'
+    }
   }
 
   function toggleCart() {
@@ -72,13 +108,25 @@ export function AppHeader() {
   return (
     <header className='app-header'>
       <section className='header-container'>
-        <div className='logo-container'>
-          <h1>Game Store</h1>
-          <img className='icon' src={icon} alt='' />
-        </div>
+        <SearchBar
+          icon={icon}
+          toggleLoginPage={toggleLoginPage}
+          filterBy={filterBy}
+          debouncedSetFilter={debouncedSetFilter}
+          navigate={navigate}
+          toggleNavBar={toggleNavBar}
+        />
         <nav className='app-nav'>
           <NavLink to='/'>Home</NavLink>
-          <NavLink to='/game'>Games</NavLink>
+          <NavLink
+            onClick={() => {
+              event.preventDefault()
+              setFilterBy(gameService.getDefaultFilter())
+            }}
+            to='/game'
+          >
+            Games
+          </NavLink>
           <NavLink to='/dashboard'>Dashboard</NavLink>
           <NavLink to='/about'>About</NavLink>
         </nav>
@@ -98,7 +146,10 @@ export function AppHeader() {
           </button>
         )) || (
           <section className='login-container'>
-            <Link to={`/user/${user._id}`}>Hello {user.fullname}</Link>
+            <Link to={`/user/${user._id}`}>
+              <i class='fa-solid fa-user'></i>
+              <span>{user.fullname}</span>
+            </Link>
             {user && <span>{score}$</span>}
             <button onClick={onLogout}>Logout</button>
           </section>
@@ -114,6 +165,11 @@ export function AppHeader() {
       </section>
       {isCart && <Cart toggleCart={toggleCart} setScore={setScore} />}
       <UserMsg />
+      <NavBar
+        navBarRef={navBarRef}
+        toggleCart={toggleCart}
+        toggleNavBar={toggleNavBar}
+      />
     </header>
   )
 }

@@ -5,6 +5,18 @@
   text-align: center;
 }
 
+/* @media (max-width:400px) {
+  #root{
+    max-width: 100px;
+    margin: 0;
+    padding: 2rem;
+
+  }
+  
+} */
+
+
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -63,8 +75,8 @@
   --mid-importance: #ffcc5c;
   --high-importance: #d96459;
 
+  --blue: #1976d2;
+
 } 
 
 
-@import '/node_modules/@fortawesome/fontawesome-free/css/all.min.css';
-@import "assets/css/main.css";

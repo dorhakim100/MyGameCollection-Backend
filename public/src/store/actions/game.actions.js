@@ -72,10 +72,15 @@ export function saveGame(game) {
 
 export function setFilterBy(filterBy) {
   store.dispatch({ type: SET_FILTER_BY, filterBy })
+  store.dispatch({ type: SET_IS_LOADING, isLoading: true })
 }
 
 export function setIsLoadingFalse(isLoading) {
   store.dispatch({ type: SET_IS_LOADING, isLoading })
+}
+
+export function setIsLoadingTrue() {
+  store.dispatch({ type: SET_IS_LOADING, isLoading: true })
 }
 
 export function getAllGames() {

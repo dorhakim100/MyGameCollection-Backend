@@ -12,6 +12,7 @@ export const gameService = {
   getEmptygame,
   getDefaultFilter,
   getMaxPage,
+  getRandomGames,
 }
 
 function query(filterBy = {}) {
@@ -63,10 +64,28 @@ function getDefaultFilter() {
   }
 }
 
-function getMaxPage() {
-  return query().then((games) => {
+function getMaxPage(filterBy) {
+  const filterToSet = { ...filterBy, pageIdx: undefined }
+  // return query(filterToSet).then((games) => {
+  //   const gamesLength = games.length
+  //   const maxPage = Math.ceil(gamesLength / PAGE_SIZE)
+  //   return maxPage
+  // })
+  return query(filterToSet).then((games) => {
     const gamesLength = games.length
     const maxPage = Math.ceil(gamesLength / PAGE_SIZE)
+    console.log(maxPage)
     return maxPage
+  })
+}
+
+function getRandomGames() {
+  const randomGames = []
+  return query({ isAll: true }).then((games) => {
+    for (let i = 0; i < 12; i++) {
+      const currIdx = utilService.getRandomIntInclusive(0, 35)
+      randomGames.push(games[currIdx])
+    }
+    return randomGames
   })
 }

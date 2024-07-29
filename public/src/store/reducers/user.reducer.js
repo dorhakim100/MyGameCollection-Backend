@@ -23,8 +23,6 @@ const initialState = {
   shoppingCart: (user && userService.getLoggedinUser().gamesInCart) || [],
 }
 
-console.log(initialState.shoppingCart)
-
 export function userReducer(state = initialState, action = {}) {
   switch (action.type) {
     //* Count

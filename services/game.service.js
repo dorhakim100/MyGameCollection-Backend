@@ -13,6 +13,8 @@ export const gameService = {
 
 function query(filterBy = {}) {
   console.log('filterBy:', filterBy)
+  if (filterBy.isAll) return Promise.resolve(games)
+
   let { inStock, pageIdx } = filterBy
   const pageIdxInteger = +pageIdx
 

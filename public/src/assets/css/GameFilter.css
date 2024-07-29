@@ -1,4 +1,10 @@
 
+.filtering-container{
+    display: flex;
+    justify-content: space-between;
+    width: 40vw;
+}
+
 
 .filtering-container>input[type='checkbox']{
     display: none;
@@ -75,10 +81,10 @@
 
 .transparent-checkbox:has(input:checked) > label{
     color: var(--border);
-    background-color: var(--high-importance);
+    background-color: var(--blue);
 }
 .company-container:has(input:checked) > label{
-    background-color: var(--high-importance);
+    background-color: var(--blue);
 }
 
 .companies-container{

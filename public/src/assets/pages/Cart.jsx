@@ -6,11 +6,12 @@ import { removeGameFromCart } from '../../store/actions/user.actions.js'
 import { clearCart } from '../../store/actions/user.actions.js'
 import { checkoutStore } from '../../store/actions/user.actions.js'
 
-import '../css/Cart.css'
+// import '../css/Cart.css'
 import {
   showErrorMsg,
   showSuccessMsg,
 } from '../../services/event-bus.service.js'
+import { utilService } from '../../services/util.service.js'
 
 export function Cart({ toggleCart, setScore }) {
   const user = useSelector(
@@ -19,7 +20,6 @@ export function Cart({ toggleCart, setScore }) {
   const storeCart = useSelector(
     (stateSelector) => stateSelector.userModule.shoppingCart
   )
-  console.log(storeCart)
 
   const navigate = useNavigate()
   const initialValue = 0
@@ -65,16 +65,35 @@ export function Cart({ toggleCart, setScore }) {
     if (!user) {
       showErrorMsg('Please login first')
     }
-    const sum = storeCart.reduce(
-      (accu, currentGame) => accu + currentGame.price,
-      initialValue
-    )
+
+    const newOrder = makeNewOrder()
+    userService.setOrder(newOrder)
+
+    const sum = getCartAmount()
     const newScore = user.score - sum
     checkoutStore(newScore).then(() => {
       setScore(newScore)
       showSuccessMsg('Order placed')
       navigate(`/user/${user._id}`)
     })
+  }
+
+  function getCartAmount() {
+    const sum = storeCart.reduce(
+      (accu, currentGame) => accu + currentGame.price,
+      initialValue
+    )
+    return sum
+  }
+
+  function makeNewOrder() {
+    const newOrder = {
+      _id: utilService.makeId(),
+      items: storeCart,
+      placedAt: new Date().getTime(),
+      amount: getCartAmount(),
+    }
+    return newOrder
   }
 
   return (

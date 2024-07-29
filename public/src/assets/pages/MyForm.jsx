@@ -2,7 +2,7 @@ import React from 'react'
 import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
 
-import '../css/LoginSignun.css'
+// import '../css/LoginSignun.css'
 
 const SignupSchema = Yup.object().shape({
   username: Yup.string()
@@ -16,7 +16,7 @@ const SignupSchema = Yup.object().shape({
   fullname: Yup.string().min(2, 'Too Short!').required('Required'),
 })
 
-export function MyForm({ handleSubmit, isSignup }) {
+export function MyForm({ handleSubmit, isSignup, handleChange }) {
   return (
     <div>
       <Formik
@@ -34,12 +34,7 @@ export function MyForm({ handleSubmit, isSignup }) {
         }}
       >
         {({ errors, touched }) => (
-          <Form
-            className='login-form'
-            onSubmit={() => {
-              handleSubmit()
-            }}
-          >
+          <Form className='login-form' onSubmit={handleSubmit}>
             <Field name='username' placeholder='Username' />
             {errors.username && touched.username ? (
               <div>{errors.username}</div>

@@ -7,6 +7,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 import { AppHeader } from './assets/pages/AppHeader.jsx'
+import { SearchBar } from './assets/pages/SearchBar.jsx'
 import { Home } from './assets/pages/Home.jsx'
 import { Dashboard } from './assets/pages/Dashboard.jsx'
 import { GameIndex } from './assets/pages/GameIndex.jsx'
@@ -28,6 +29,7 @@ export function App() {
         <Router>
           <section className='app main-layout'>
             <AppHeader />
+            {/* <SearchBar /> */}
             <main>
               <Routes>
                 <Route path='/' element={<Home />} />

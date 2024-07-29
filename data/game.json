@@ -1,5 +1,21 @@
 [
     {
+        "name": "Pokemon Heart Gold",
+        "price": 279,
+        "labels": [
+            "Adventure",
+            "RPG"
+        ],
+        "inStock": true,
+        "companies": [
+            "Nintendo"
+        ],
+        "cover": "https://m.media-amazon.com/images/I/81ESDoG1PVL._AC_UF1000,1000_QL80_.jpg",
+        "preview": "Explore Jhoto once again.",
+        "_id": "Rk6HI",
+        "createdAt": 1722259518375
+    },
+    {
         "name": "Pokemon Emerald (New In Box)",
         "price": 1220.95,
         "labels": [

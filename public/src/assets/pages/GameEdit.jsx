@@ -13,7 +13,7 @@ import { showErrorMsg } from '../../services/event-bus.service.js'
 
 import { MyForm } from './MyForm.jsx'
 
-import '../css/GameEdit.css'
+// import '../css/GameEdit.css'
 
 export function GameEdit() {
   const labels = [
@@ -48,9 +48,7 @@ export function GameEdit() {
   )
 
   useEffect(() => {
-    console.log(game)
     loadGame()
-    console.log(cover)
   }, [params.gameId])
 
   function loadGame() {
@@ -58,7 +56,6 @@ export function GameEdit() {
     gameService
       .getById(params.gameId)
       .then((game) => {
-        console.log(game)
         setEditGame({ ...game })
         setGame({ ...game })
         setCover(game.cover)
@@ -77,7 +74,6 @@ export function GameEdit() {
 
     let newCompanies = []
     let newLabels = []
-    console.log(field)
 
     switch (target.type) {
       case 'number':
@@ -135,8 +131,7 @@ export function GameEdit() {
     }
     // todoService.save(todoToEdit)
     saveGame(editGame)
-      .then((savedTodo) => {
-        console.log(savedTodo)
+      .then(() => {
         showSuccessMsg('Game saved')
         loadGames(filterBy).then(() => {
           navigate(`/game`)

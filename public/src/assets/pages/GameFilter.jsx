@@ -2,10 +2,62 @@ import { useEffect, useState, useRef } from 'react'
 
 import { setFilterBy } from '../../store/actions/game.actions.js'
 import { utilService } from '../../services/util.service.js'
+import { setIsLoadingTrue } from '../../store/actions/game.actions.js'
 
-import { Button } from '@mui/material'
+import { Button, Autocomplete, TextField } from '@mui/material'
+import { styled, alpha } from '@mui/material/styles'
+import AppBar from '@mui/material/AppBar'
+import Box from '@mui/material/Box'
+import Toolbar from '@mui/material/Toolbar'
+import IconButton from '@mui/material/IconButton'
+import Typography from '@mui/material/Typography'
+import InputBase from '@mui/material/InputBase'
+import MenuIcon from '@mui/icons-material/Menu'
+import SearchIcon from '@mui/icons-material/Search'
 
 import '../css/GameFilter.css'
+
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginLeft: 0,
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(1),
+    width: 'auto',
+  },
+}))
+
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}))
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  width: '100%',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create('width'),
+    [theme.breakpoints.up('sm')]: {
+      width: '12ch',
+      '&:focus': {
+        width: '20ch',
+      },
+    },
+  },
+}))
 
 export function GameFilter({ filterBy }) {
   const labels = [
@@ -35,7 +87,6 @@ export function GameFilter({ filterBy }) {
   //   const isCheckRef = useRef()
 
   useEffect(() => {
-    console.log(onFilterBy)
     setFilterBy(onFilterBy)
   }, [onFilterBy])
 
@@ -54,14 +105,21 @@ export function GameFilter({ filterBy }) {
   }
 
   function handleChange({ target }) {
-    const field = target.name
+    setIsLoadingTrue()
+    let field = target.name
     let value = target.value
     let checkedButton = target.id
+
+    if (!field) {
+      field = 'txt'
+    }
 
     switch (target.type) {
       case 'number':
       case 'range':
         value = +value || ''
+        // setOnFilterBy({ ...onFilterBy, maxPrice: value, pageIdx: 0 })
+
         break
 
       case 'checkbox':
@@ -93,8 +151,6 @@ export function GameFilter({ filterBy }) {
       default:
         break
     }
-    console.log(field)
-    console.log(value)
 
     debouncedSetFilter.current((prevFilter) => ({
       ...prevFilter,
@@ -131,6 +187,15 @@ export function GameFilter({ filterBy }) {
         checked={isFiltering}
         // ref={isCheckRef}
       />
+      <Search onChange={handleChange} id='name' name='txt'>
+        <SearchIconWrapper>
+          <SearchIcon />
+        </SearchIconWrapper>
+        <StyledInputBase
+          placeholder='Search...'
+          inputProps={{ 'aria-label': 'search' }}
+        />
+      </Search>
 
       <div className='game-filter'>
         <button className='x-button' onClick={() => onSetIsFiltering()}>
@@ -138,8 +203,16 @@ export function GameFilter({ filterBy }) {
         </button>
         <button onClick={onClearFilter}>Clear Filter</button>
         <div className='text-container'>
-          <label htmlFor='name'>Game Title:</label>
-          <input onChange={handleChange} type='search' id='name' name='txt' />
+          {/* <label htmlFor='name'>Game Title:</label> */}
+          <Search onChange={handleChange} id='name' name='txt'>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder='Search...'
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </Search>
         </div>
         <div className='price-container'>
           <label htmlFor='price'>Max Price</label>

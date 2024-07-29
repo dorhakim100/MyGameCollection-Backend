@@ -18,10 +18,7 @@ import { getAllGames } from '../../store/actions/game.actions.js'
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 export function Chart({ companies }) {
-  console.log(companies)
-
   const games = useSelector((storeState) => storeState.gameModule.games)
-  console.log(games)
 
   useEffect(() => {
     getAllGames()

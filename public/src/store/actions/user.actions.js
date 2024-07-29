@@ -10,6 +10,7 @@ import {
 import { store } from '../store.js'
 
 export function login(credentials) {
+  console.log(credentials)
   return userService
     .login(credentials)
     .then((user) => {
@@ -23,7 +24,6 @@ export function login(credentials) {
 }
 
 export function signup(credentials) {
-  console.log(credentials)
   return userService
     .signup(credentials)
     .then((user) => {
