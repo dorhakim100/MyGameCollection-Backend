@@ -6,21 +6,30 @@ import cookieParser from 'cookie-parser'
 import { loggerService } from './services/logger.service.js'
 import { gameService } from './services/game.service.js'
 
+const __dirname = dirname(fileURLToPath(import.meta.url))
 const app = express()
 
-const corsOptions = {
-  origin: [
-    'http://127.0.0.1:8080',
-    'http://localhost:8080',
+if (process.env.NODE_ENV === 'production') {
+  // Express serve static files on production environment
+  app.use(express.static(path.resolve(__dirname, 'public')))
+} else {
+  // Configuring CORS
+  const corsOptions = {
+    origin: [
+      'http://127.0.0.1:8080',
+      'http://localhost:8080',
 
-    'http://localhost:5173',
-    'http://127.0.0.1:5173',
+      'http://localhost:5173',
+      'http://127.0.0.1:5173',
 
-    'http://localhost:5174',
-    'http://127.0.0.1:5174',
-  ],
-  credentials: true,
+      'http://localhost:5174',
+      'http://127.0.0.1:5174',
+    ],
+    credentials: true,
+  }
+  app.use(cors(corsOptions))
 }
+
 // App Configuration
 app.use(express.static('public'))
 app.use(cookieParser()) // for res.cookies
