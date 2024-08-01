@@ -32,10 +32,10 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // App Configuration
-app.use(express.static('public'))
 app.use(cookieParser()) // for res.cookies
 app.use(express.json()) // for req.body
-app.use(cors(corsOptions))
+app.use(express.static('public'))
+// app.use(cors(corsOptions))
 
 // **************** Games API ****************:
 // GET games
